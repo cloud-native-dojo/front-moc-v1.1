@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dock UI</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="ship">
+      Ship
+    <div
+      class="dropzone"
+      ondragover="onDragOver(event);"
+      ondrop="onDrop(event);"
+    >
+    </div>
+    </div>
+    <div class="example-parent">
+    <h1>container list</h1>
+    <div
+      class="example-origin"
+      ondragover="onDragOver(event);"
+      ondrop="onDrop(event);"
+    >
+      container
+      <div
+        id="draggable-1"
+        class="example-draggable"
+        draggable="true"
+        ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)"
+      >
+        thing 1
+      </div>
+      <div
+        id="draggable-2"
+        class="example-draggable"
+        draggable="true"
+        ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)"
+      >
+        thing 2
+      </div>
+      <div
+        id="draggable-3"
+        class="example-draggable"
+        draggable="true"
+        ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)"
+      >
+        thing 3
+      </div>
+      <div
+        id="draggable-4"
+        class="example-draggable"
+        draggable="true"
+        ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)"
+      >
+        thing 4
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

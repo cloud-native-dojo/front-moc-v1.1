@@ -1,0 +1,46 @@
+.example-parent {
+  border: 2px solid #DFA612;
+  color: black;
+  display: flex;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.example-origin {
+  flex-basis: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.example-draggable {
+  background-color: #4AAE9B;
+  font-weight: normal;
+  text-align:center;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+}
+
+.ship {
+  width: 1000px;
+  height:  400px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.dropzone {
+  background-color: #6DB65B;
+  box-sizing: border-box;
+  display: flex;
+  align-items: left;
+  justify-content:flex-end;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 90%;
+}
