@@ -1,0 +1,77 @@
+.circle1 {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 30%;
+}
+
+.circle2 {
+  position: relative;
+  width: 500px;
+  padding-top: 500px;
+  border-radius: 50%;
+  background-color: #6699FF;
+}
+
+.isoland1 {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
+  background-color: #CCCCCC;
+  transform: skewX(-20deg);
+}
+
+.isoland2 {
+  position: absolute;
+  top: 55%;
+  left: 62%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
+  background-color: #33FF00;
+  transform: skewX(-20deg);
+}
+
+.isoland3 {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
+  background-color: #33FF00;
+  transform: skewX(20deg);
+}
+
+.isoland4 {
+  position: absolute;
+  top: 5%;
+  left: 62%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
+  background-color: #CCCCCC;
+  transform: skewX(20deg);
+}
+
+.house {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10%;
+  padding-top: 10%;
+  background-color: #faf82d;
+  transform: translate(-50%, -50%);
+}
+
+.ship {
+  cursor: move;
+  position: absolute;
+  z-index: 1000;
+}
+
+.drag {
+  z-index: 1001;
+}
