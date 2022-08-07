@@ -12,7 +12,7 @@
   background-color: #6699FF;
 }
 
-.isoland1 {
+.island1 {
   position: absolute;
   top: 5%;
   left: 8%;
@@ -23,7 +23,7 @@
   transform: skewX(-20deg);
 }
 
-.isoland2 {
+.island2 {
   position: absolute;
   top: 55%;
   left: 62%;
@@ -34,7 +34,7 @@
   transform: skewX(-20deg);
 }
 
-.isoland3 {
+.island3 {
   position: absolute;
   top: 55%;
   left: 8%;
@@ -45,7 +45,7 @@
   transform: skewX(20deg);
 }
 
-.isoland4 {
+.island4 {
   position: absolute;
   top: 5%;
   left: 62%;
