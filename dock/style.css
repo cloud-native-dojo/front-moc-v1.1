@@ -1,33 +1,10 @@
-.example-parent {
-  border: 2px solid #DFA612;
-  color: black;
-  display: flex;
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
-.example-origin {
-  flex-basis: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  padding: 10px;
-}
-
-.example-draggable {
-  background-color: #4AAE9B;
-  border: solid;
-  font-weight: normal;
-  text-align: center;
-  margin: 10px;
-  margin-bottom: 0px;
+.message {
+  font-size: 50px;
   margin-top: 0px;
-  width: 200px;
-  height: 100px;
-  padding: 10px;
+  margin-bottom: 0px;
 }
 
+/* 船 */
 .ship {
   width: 1000px;
   height: 400px;
@@ -57,6 +34,37 @@
   border-right: 100px solid transparent;
 }
 
+/* コンテナ */
+.example-parent {
+  border: 3px solid;
+  color: black;
+  display: flex;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.example-origin {
+  flex-basis: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.example-draggable {
+  background-color: #4AAE9B;
+  border: 3px solid;
+  font-weight: normal;
+  text-align: center;
+  margin: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  width: 200px;
+  height: 80px;
+  padding: 10px;
+}
+
 .container-box {
-  font-size: large;
+  font-size: 30px;
 }
