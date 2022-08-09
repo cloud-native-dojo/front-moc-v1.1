@@ -17,8 +17,10 @@
 
 .example-draggable {
   background-color: #4AAE9B;
+  border: solid;
   font-weight: normal;
-  text-align:center;
+  text-align: center;
+  margin: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
   width: 200px;
@@ -28,19 +30,33 @@
 
 .ship {
   width: 1000px;
-  height:  400px;
+  height: 400px;
   padding: 10px;
   margin: 0 auto;
 }
 
 .dropzone {
-  background-color: #6DB65B;
+  margin: 0 auto;
+
+  border: 3px solid;
   box-sizing: border-box;
   display: flex;
   align-items: left;
-  justify-content:flex-end;
+  justify-content: flex-end;
   flex-direction: column;
   flex-wrap: wrap;
   width: 90%;
-  height: 90%;
+  height: 335px;
+}
+
+.ship-base {
+  margin: 0 auto;
+  width: 800px;
+  border-top: 200px solid #a9a9a9;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+}
+
+.container-box {
+  font-size: large;
 }
