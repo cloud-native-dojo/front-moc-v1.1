@@ -2,14 +2,16 @@
 
   //要素の取得
   var elements = document.getElementsByClassName("ship");
-  var island = [document.getElementsByClassName("island1")[0],
-                document.getElementsByClassName("island2")[0],
-                document.getElementsByClassName("island3")[0],
-                document.getElementsByClassName("island4")[0]];
-  var island_rect = [island[0].getBoundingClientRect(), 
-                     island[1].getBoundingClientRect(), 
-                     island[2].getBoundingClientRect(), 
-                     island[3].getBoundingClientRect()];
+  var island = [document.getElementsByClassName("island1"),
+                document.getElementsByClassName("island2"),
+                document.getElementsByClassName("island3"),
+                document.getElementsByClassName("island4")];
+  var island_rect = [island[0][0].getBoundingClientRect(), 
+                     island[1][0].getBoundingClientRect(), 
+                     island[2][0].getBoundingClientRect(), 
+                     island[3][0].getBoundingClientRect()];
+  var house = document.getElementsByClassName("house")[0];
+  var house_rect = house.getBoundingClientRect();
   var onisland1 = 0;
   var onisland2 = 0;
   var onisland3 = 0;
@@ -87,18 +89,27 @@
     document.body.removeEventListener("touchmove", mmove, false);
     drag.removeEventListener("touchend", mup, false);
 
-    //クラス名 .drag も消す
     for (let j = 0; j < island_rect.length; j++) {
-      island[j].style.backgroundColor = '#CCCCCC';
+      island[j][0].style.backgroundColor = '#CCCCCC';
     }
     for (let i = 0; i < elements.length;i++){
       var ship_rect = elements[i].getBoundingClientRect();
-      for (let j = 0; j < island_rect.length;j++) {
-        if (detectCollision(island_rect[j], ship_rect)) {
-          island[j].style.backgroundColor = '#33FF00';
+      if (detectCollision(ship_rect, house_rect)) {
+        window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html';
+      }else{
+        for (let j = 0; j < island_rect.length;j++) {
+          if (detectCollision(island_rect[j], ship_rect)) {
+            console.log((island_rect[j].bottom - island_rect[j].top) / 4);
+            elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
+            elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + "px";
+            island[j][0].style.backgroundColor = '#33FF00';
+            break;
+          }
         }
       }
     }
+
+    //クラス名 .drag も消す
     drag.classList.remove("drag");
   }
 
