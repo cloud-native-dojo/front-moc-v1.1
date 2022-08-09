@@ -1,5 +1,11 @@
 let dragged = null;
 
+var btn = document.getElementById("btn");
+
+btn.addEventListener('click', function() {
+  window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html';
+}, false);
+
 function onDragStart(event) {
   event
     .dataTransfer
