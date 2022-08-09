@@ -55,7 +55,32 @@
   background-color: #CCCCCC;
   transform: skewX(20deg);
 }
-
+.island1_port {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  padding-top: 30%;
+}
+.island2_port {
+  position: absolute;
+  top: 55%;
+  left: 62%;
+  padding-top: 30%;
+}
+.island3_port {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  padding-top: 30%;
+  padding-left: 20%;
+}
+.island4_port {
+  position: absolute;
+  top: 5%;
+  left: 62%;
+  padding-top: 30%;
+  padding-left: 20%;
+}
 .house {
   position: absolute;
   top: 50%;
