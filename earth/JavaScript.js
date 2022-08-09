@@ -99,9 +99,8 @@
       }else{
         for (let j = 0; j < island_rect.length;j++) {
           if (detectCollision(island_rect[j], ship_rect)) {
-            console.log((island_rect[j].bottom - island_rect[j].top) / 4);
             elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
-            elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + "px";
+            elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
             island[j][0].style.backgroundColor = '#33FF00';
             break;
           }
