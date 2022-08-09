@@ -60,26 +60,34 @@
   top: 5%;
   left: 8%;
   padding-top: 30%;
+  font-size: 16pt;
+  font-weight: bold;
 }
 .island2_port {
   position: absolute;
   top: 55%;
   left: 62%;
   padding-top: 30%;
+  font-size: 16pt;
+  font-weight: bold;
 }
 .island3_port {
   position: absolute;
   top: 55%;
   left: 8%;
   padding-top: 30%;
-  padding-left: 20%;
+  padding-left: 18%;
+  font-size: 16pt;
+  font-weight: bold;
 }
 .island4_port {
   position: absolute;
   top: 5%;
   left: 62%;
   padding-top: 30%;
-  padding-left: 20%;
+  padding-left: 18%;
+  font-size: 16pt;
+  font-weight: bold;
 }
 .house {
   position: absolute;
