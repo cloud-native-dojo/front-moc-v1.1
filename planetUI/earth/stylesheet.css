@@ -1,0 +1,117 @@
+.circle1 {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 30%;
+}
+
+.circle2 {
+  position: relative;
+  width: 500px;
+  padding-top: 500px;
+  border-radius: 50%;
+  background-color: #6699FF;
+}
+
+.island1 {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
+  background-color: #CCCCCC;
+  transform: skewX(-20deg);
+}
+
+.island2 {
+  position: absolute;
+  top: 55%;
+  left: 62%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
+  background-color: #CCCCCC;
+  transform: skewX(-20deg);
+}
+
+.island3 {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
+  background-color: #CCCCCC;
+  transform: skewX(20deg);
+}
+
+.island4 {
+  position: absolute;
+  top: 5%;
+  left: 62%;
+  width: 30%;
+  padding-top: 40%;
+  border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
+  background-color: #CCCCCC;
+  transform: skewX(20deg);
+}
+.island1_port {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  padding-top: 30%;
+  font-size: 16pt;
+  font-weight: bold;
+}
+.island2_port {
+  position: absolute;
+  top: 55%;
+  left: 62%;
+  padding-top: 30%;
+  font-size: 16pt;
+  font-weight: bold;
+}
+.island3_port {
+  position: absolute;
+  top: 55%;
+  left: 8%;
+  padding-top: 30%;
+  padding-left: 18%;
+  font-size: 16pt;
+  font-weight: bold;
+}
+.island4_port {
+  position: absolute;
+  top: 5%;
+  left: 62%;
+  padding-top: 30%;
+  padding-left: 18%;
+  font-size: 16pt;
+  font-weight: bold;
+}
+.house {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  margin: -25px 0 0 -25px;
+  background-color: #faf82d;
+}
+
+.ship {
+  cursor: move;
+  position: absolute;
+  z-index: 1000;
+}
+
+.drag {
+  z-index: 1001;
+}
+
+.message {
+  font-size: 50px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+}
