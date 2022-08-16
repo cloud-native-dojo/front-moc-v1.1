@@ -3,15 +3,22 @@
 
 <head>
   <title>Dock UI</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dockStyle.css" />
+  <script src="https://kit.fontawesome.com/e8b176f8ab.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-  <button id="btn">Next</button>
   <div class="ship">
     <h2 class="message">Please put the necessary service</h2>
     <div class="dropzone" ondragover="onDragOver(event);" ondrop="onDrop(event);">
     </div>
+    <div class="next_btn">
+      <a class="next_btn_msg" href="javascript:moveNewPage();">
+        <i class="fa-solid fa-circle-arrow-right fa-3x">Go!</i>
+      </a>
+    </div>
+
   </div>
   <div class="ship-base">
     <p></p>
@@ -44,4 +51,5 @@
   </div>
 </body>
 <script src="script.js"></script>
+
 </html>

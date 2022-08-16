@@ -2,7 +2,9 @@ let dragged = null;
 
 var btn = document.getElementById("btn");
 
-btn.addEventListener('click', function() {
+var count = 0;
+
+btn.addEventListener('click', function () {
   window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html';
 }, false);
 
@@ -33,4 +35,27 @@ function onDrop(event) {
 
 
 function onDragEnd(event) {
+}
+
+/*
+function moveNewPage() {
+  var url = document.URL;
+  var count = 0;
+  if (url.match(/separate/)) {
+    count++;
+    if (url.match(/\?/)) {
+      location.href = url + "&addShip=" + count;
+    } else {
+      location.href = url + "?addShip=" + count;
+    }
+  }
+}
+ */
+
+
+function moveNewPage() {
+  var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html"
+  count++;
+
+  window.location.href = url + "?addShip=" + String(count);
 }
