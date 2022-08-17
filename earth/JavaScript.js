@@ -1,15 +1,19 @@
+var count = 0;
+
+window.onload = getUrlData();
+
 (function () {
 
   //要素の取得
   var elements = document.getElementsByClassName("ship");
   var island = [document.getElementsByClassName("island1"),
-                document.getElementsByClassName("island2"),
-                document.getElementsByClassName("island3"),
-                document.getElementsByClassName("island4")];
-  var island_rect = [island[0][0].getBoundingClientRect(), 
-                     island[1][0].getBoundingClientRect(), 
-                     island[2][0].getBoundingClientRect(), 
-                     island[3][0].getBoundingClientRect()];
+  document.getElementsByClassName("island2"),
+  document.getElementsByClassName("island3"),
+  document.getElementsByClassName("island4")];
+  var island_rect = [island[0][0].getBoundingClientRect(),
+  island[1][0].getBoundingClientRect(),
+  island[2][0].getBoundingClientRect(),
+  island[3][0].getBoundingClientRect()];
   var house = document.getElementsByClassName("house")[0];
   var house_rect = house.getBoundingClientRect();
   var onisland1 = 0;
@@ -92,12 +96,12 @@
     for (let j = 0; j < island_rect.length; j++) {
       island[j][0].style.backgroundColor = '#CCCCCC';
     }
-    for (let i = 0; i < elements.length;i++){
+    for (let i = 0; i < elements.length; i++) {
       var ship_rect = elements[i].getBoundingClientRect();
       if (detectCollision(ship_rect, house_rect)) {
         window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html';
-      }else{
-        for (let j = 0; j < island_rect.length;j++) {
+      } else {
+        for (let j = 0; j < island_rect.length; j++) {
           if (detectCollision(island_rect[j], ship_rect)) {
             elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
             elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
@@ -116,7 +120,7 @@
     if (((rect1.left + window.pageXOffset <= rect2.left + window.pageXOffset && rect2.left + window.pageXOffset <= rect1.right + window.pageXOffset) ||
       (rect1.left + window.pageXOffset <= rect2.right + window.pageXOffset && rect2.right + window.pageXOffset <= rect1.right + window.pageXOffset)) &&
       ((rect1.top + window.pageYOffset <= rect2.top + window.pageYOffset && rect2.top + window.pageYOffset <= rect1.bottom + window.pageYOffset) ||
-      (rect1.top + window.pageYOffset <= rect2.bottom + window.pageYOffset && rect2.bottom + window.pageYOffset <= rect1.bottom + window.pageYOffset))
+        (rect1.top + window.pageYOffset <= rect2.bottom + window.pageYOffset && rect2.bottom + window.pageYOffset <= rect1.bottom + window.pageYOffset))
     ) {
       return true;
     } else {
@@ -125,3 +129,22 @@
   }
 
 })()
+
+//URLから情報を取得する
+function getUrlData() {
+  const url = new URL(window.location.href);
+
+  const params = url.searchParams;
+
+  const ShipNum = params.get("ShipNum");
+
+  count = ShipNum;
+  console.log(count)
+}
+
+function moveNewPage() {
+  var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/dock.html"
+  count++;
+
+  window.location.href = url + "?ShipNum=" + String(count);
+}
