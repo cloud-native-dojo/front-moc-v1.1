@@ -44,7 +44,7 @@ function getUrlData() {
 
   count = ShipNum;
 
-  console.log(count)
+  console.log(count);
 }
 
 function onDragEnd(event) {

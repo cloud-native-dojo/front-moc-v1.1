@@ -139,7 +139,7 @@ function getUrlData() {
   const ShipNum = params.get("ShipNum");
 
   count = ShipNum;
-  console.log(count)
+  console.log(count);
 }
 
 function moveNewPage() {
