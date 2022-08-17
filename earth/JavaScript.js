@@ -143,7 +143,7 @@ function getUrlData() {
 }
 
 function moveNewPage() {
-  var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/dock.html"
+  var url = "https://cloud-native-dojo.github.io/front-moc-2022/dick/dock.html"
   count++;
 
   window.location.href = url + "?ShipNum=" + String(count);
