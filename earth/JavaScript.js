@@ -1,4 +1,5 @@
 var count = 0;
+var IslandNum = 0;
 
 window.onload = getUrlData();
 
@@ -146,4 +147,30 @@ function moveNewPage() {
   var nextUrl = "https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html"
 
   window.location.href = nextUrl + "?ShipNum=" + String(count);
+}
+
+function addIsland() {
+  const url = new URL(window.location.href);
+
+  const params = url.searchParams;
+
+  IslandNum = params.get("IslandNum");
+
+  IslandNum++;
+
+  addIslandUrl = url + "?IslandNum=" + String(IslandNum)
+  window.location.href(addIslandUrl)
+}
+
+function deleteIsland() {
+  const url = new URL(window.location.href);
+
+  const params = url.searchParams;
+
+  IslandNum = params.get("IslandNum");
+
+  IslandNum--;
+
+  deleteIslandUrl = url + "?IslandNum=" + String(IslandNum)
+  window.location.href(deleteIslandUrl)
 }

@@ -129,6 +129,15 @@
   border: 5px solid black;
 }
 
+.island_btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 5px;
+  border: 5px solid black;
+}
+
+
 .btn_msg {
   color: inherit;
   text-decoration: none;
