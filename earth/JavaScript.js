@@ -139,12 +139,11 @@ function getUrlData() {
   const ShipNum = params.get("ShipNum");
 
   count = ShipNum;
-  console.log(count);
+  //console.log(count);
 }
 
 function moveNewPage() {
   var nextUrl = "https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html"
-  count++;
 
   window.location.href = nextUrl + "?ShipNum=" + String(count);
 }
