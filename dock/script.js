@@ -2,9 +2,10 @@ let dragged = null;
 
 var btn = document.getElementById("btn");
 
-var count = 0;
+var ShipNum;
+var IslandNum;
 
-window.onload = getUrlData();
+window.onload = getCount();
 
 btn.addEventListener('click', function () {
   window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html';
@@ -35,16 +36,35 @@ function onDrop(event) {
   }
 }
 
-function getUrlData() {
-  const url = new URL(window.location.href);
+//urlのパラメーター取得
+function GetQueryString() {
+  if (1 < document.location.search.length) {
+    var query = document.location.search.substring(1);
+    var parameters = query.split('&');
 
-  const params = url.searchParams;
+    var result = new Object();
+    for (var i = 0; i < parameters.length; i++) {
+      var element = parameters[i].split('=');
 
-  const ShipNum = params.get("ShipNum");
+      var paramName = decodeURIComponent(element[0]);
+      var paramValue = decodeURIComponent(element[1]);
 
-  count = ShipNum;
+      result[paramName] = decodeURIComponent(paramValue);
+    }
+    return result;
+  }
+  return null;
+}
 
-  console.log(count);
+//船と島の個数確認
+function getCount() {
+  var params = GetQueryString();
+
+  IslandNum = params["IslandNum"];
+  ShipNum = params["ShipNum"];
+
+  console.log(IslandNum);
+  console.log(ShipNum);
 }
 
 function onDragEnd(event) {
@@ -52,24 +72,38 @@ function onDragEnd(event) {
 
 function moveNewPage() {
   var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html"
-  count++;
+  ShipNum++;
 
-  httprequest();
-
-  window.location.href = url + "?ShipNum=" + String(count);
+  window.location.href = url + "?ShipNum=" + String(ShipNum);
 }
 
-function httprequest() {
-  console.log("send!!");
-  var data = {
+
+//Podのデータを取得する関数
+async function getPodData() {
+  let response = await fetch("http://127.0.0.1:8000/docs#/pods/");
+
+  if (response.ok) {
+    let json = await response.json();
+    console.log(json);
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
+}
+
+
+//wordpressが乗ったpodを作成する関数(一時的にwordpressに固定してます)
+async function makePod() {
+  let pod = {
     "containers": {
       "wordpress": 1
     }
-  }
-  await fetch("http://127.0.0.1:8000/docs#/", {
-    method: "POST",
-    body: data
+  };
+
+  let makePodResponse = await fetch("http://127.0.0.1:8000/docs#/pods/", {
+    method: 'POST',
+    body: JSON.stringify(pod)
   });
 
-  console.log("send!!");
+  let result = await response.json();
+  alert(result.message);
 }
