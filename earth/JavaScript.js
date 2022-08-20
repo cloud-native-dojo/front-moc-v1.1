@@ -3,38 +3,6 @@ var IslandNum;
 
 window.onload = getCount();
 
-
-//urlのパラメーター取得
-function GetQueryString() {
-  if (1 < document.location.search.length) {
-    var query = document.location.search.substring(1);
-    var parameters = query.split('&');
-
-    var result = new Object();
-    for (var i = 0; i < parameters.length; i++) {
-      var element = parameters[i].split('=');
-
-      var paramName = decodeURIComponent(element[0]);
-      var paramValue = decodeURIComponent(element[1]);
-
-      result[paramName] = decodeURIComponent(paramValue);
-    }
-    return result;
-  }
-  return null;
-}
-
-//船と島の個数確認
-function getCount() {
-  var params = GetQueryString();
-
-  IslandNum = params["IslandNum"];
-  ShipNum = params["ShipNum"];
-
-  console.log(IslandNum);
-  console.log(ShipNum);
-}
-
 (function () {
 
   //要素の取得
@@ -163,6 +131,39 @@ function getCount() {
 
 })()
 
+//urlのパラメーター取得
+function GetQueryString() {
+  if (1 < document.location.search.length) {
+    var query = document.location.search.substring(1);
+    var parameters = query.split('&');
+
+    var result = new Object();
+    for (var i = 0; i < parameters.length; i++) {
+      var element = parameters[i].split('=');
+
+      var paramName = decodeURIComponent(element[0]);
+      var paramValue = decodeURIComponent(element[1]);
+
+      result[paramName] = decodeURIComponent(paramValue);
+    }
+    return result;
+  }
+  return null;
+}
+
+//船と島の個数確認
+function getCount() {
+  var params = GetQueryString();
+
+  IslandNum = params["IslandNum"];
+  ShipNum = params["ShipNum"];
+
+  console.log(IslandNum);
+  console.log(ShipNum);
+
+  addShip();
+}
+
 
 function moveNewPage() {
   var nextUrl = "https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html"
@@ -170,27 +171,28 @@ function moveNewPage() {
   window.location.href = nextUrl + "?IslandNum=" + String(IslandNum) + "&ShipNum=" + String(ShipNum);
 }
 
-var islandurl;
-
 function addIsland() {
-
-  islandurl
-
   console.log(location.href);
   islandurl = url.substr(0, url.indexOf("?IslandNum="));
-
   window.location.href = url + "?IslandNum=" + String(IslandNum)
-
 }
 
 function deleteIsland() {
-
   IslandNum = params.get("IslandNum");
-
   IslandNum--;
-
   //url = url.substr(0, str.indexOf("?IslandNum="));
-
   window.location.href = url + "?IslandNum=" + String(IslandNum)
+}
 
+//船を表示させるための関数
+function displayShip() {
+  var ship1 = document.getElementById("ship1");
+  ship1.innerHTML = "<div class=\"ship\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\"></div>";
+}
+
+//ShipNumが0より多きければ船の表示関数を起動
+function addShip() {
+  if (ShipNum > 0) {
+    displayShip();
+  }
 }
