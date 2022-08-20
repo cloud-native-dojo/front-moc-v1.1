@@ -54,5 +54,22 @@ function moveNewPage() {
   var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html"
   count++;
 
+  httprequest();
+
   window.location.href = url + "?ShipNum=" + String(count);
+}
+
+function httprequest() {
+  console.log("send!!");
+  var data = {
+    "containers": {
+      "wordpress": 1
+    }
+  }
+  await fetch("http://127.0.0.1:8000/docs#/", {
+    method: "POST",
+    body: data
+  });
+
+  console.log("send!!");
 }

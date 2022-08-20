@@ -131,11 +131,13 @@ window.onload = getUrlData();
 
 })()
 
+var url;
+var params;
 //URLから情報を取得する
 function getUrlData() {
-  const url = new URL(window.location.href);
+  url = new URL(window.location.href);
 
-  const params = url.searchParams;
+  params = url.searchParams;
 
   const ShipNum = params.get("ShipNum");
 
@@ -149,28 +151,27 @@ function moveNewPage() {
   window.location.href = nextUrl + "?ShipNum=" + String(count);
 }
 
+var islandurl;
+
 function addIsland() {
-  const url = new URL(window.location.href);
 
-  const params = url.searchParams;
+  islandurl
 
-  IslandNum = params.get("IslandNum");
+  console.log(location.href);
+  islandurl = url.substr(0, url.indexOf("?IslandNum="));
 
-  IslandNum++;
+  window.location.href = url + "?IslandNum=" + String(IslandNum)
 
-  addIslandUrl = url + "?IslandNum=" + String(IslandNum)
-  window.location.href(addIslandUrl)
 }
 
 function deleteIsland() {
-  const url = new URL(window.location.href);
-
-  const params = url.searchParams;
 
   IslandNum = params.get("IslandNum");
 
   IslandNum--;
 
-  deleteIslandUrl = url + "?IslandNum=" + String(IslandNum)
-  window.location.href(deleteIslandUrl)
+  //url = url.substr(0, str.indexOf("?IslandNum="));
+
+  window.location.href = url + "?IslandNum=" + String(IslandNum)
+
 }
