@@ -11,6 +11,11 @@ var all_ports = [document.getElementById("island1_port"),
               document.getElementById("island2_port"),
               document.getElementById("island3_port"),
               document.getElementById("island4_port")]
+
+for(var i=0;i < island.length;i++){
+  island[i][0].style.visibility = "hidden";
+  all_ports[i].style.visibility = "hidden";
+}
 var onisland1 = 0;
 var onisland2 = 0;
 var onisland3 = 0;
