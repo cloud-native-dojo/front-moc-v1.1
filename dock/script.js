@@ -5,8 +5,6 @@ var btn = document.getElementById("btn");
 var ShipNum;
 var IslandNum;
 
-window.onload = getCount();
-
 btn.addEventListener('click', function () {
   window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html';
 }, false);
@@ -56,25 +54,21 @@ function GetQueryString() {
   return null;
 }
 
-//船と島の個数確認
-function getCount() {
-  var params = GetQueryString();
-
-  IslandNum = params["IslandNum"];
-  ShipNum = params["ShipNum"];
-
-  console.log(IslandNum);
-  console.log(ShipNum);
-}
-
 function onDragEnd(event) {
 }
 
-function moveNewPage() {
+async function moveNewPage() {
   var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html"
-  ShipNum++;
-
-  window.location.href = url + "?ShipNum=" + String(ShipNum);
+  makepod('http://127.0.0.1:8000/pods/',
+    {
+      "containers": {
+        "wordpress": 1
+      }
+    })
+    .then(data => {
+      console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
+      window.location.href = url;
+    });
 }
 
 
@@ -92,18 +86,20 @@ async function getPodData() {
 
 
 //wordpressが乗ったpodを作成する関数(一時的にwordpressに固定してます)
-async function makePod() {
-  let pod = {
-    "containers": {
-      "wordpress": 1
-    }
-  };
-
-  let makePodResponse = await fetch("http://127.0.0.1:8000/pods/", {
-    method: 'POST',
-    body: JSON.stringify(pod)
-  });
-
-  let result = await response.json();
-  alert(result.message);
+async function makepod(url = '', data = {}) {
+  // 既定のオプションには * が付いています
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
+  })
+  return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
 }

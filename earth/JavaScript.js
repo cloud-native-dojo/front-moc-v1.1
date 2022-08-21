@@ -161,7 +161,7 @@ function GetQueryString() {
 function moveNewPage() {
   var nextUrl = "https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html"
 
-  window.location.href = nextUrl + "?IslandNum=" + String(IslandNum) + "&ShipNum=" + String(ShipNum);
+  window.location.href = nextUrl;
 }
 
 function addIsland() {
