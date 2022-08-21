@@ -80,7 +80,7 @@ function moveNewPage() {
 
 //Podのデータを取得する関数
 async function getPodData() {
-  let response = await fetch("http://127.0.0.1:8000/docs#/pods/");
+  let response = await fetch("http://127.0.0.1:8000/pods/");
 
   if (response.ok) {
     let json = await response.json();
@@ -99,7 +99,7 @@ async function makePod() {
     }
   };
 
-  let makePodResponse = await fetch("http://127.0.0.1:8000/docs#/pods/", {
+  let makePodResponse = await fetch("http://127.0.0.1:8000/pods/", {
     method: 'POST',
     body: JSON.stringify(pod)
   });

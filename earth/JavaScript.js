@@ -1,9 +1,21 @@
-var ShipNum;
-var IslandNum;
+(async function () {
+    console.log("test");
+    let response = await fetch("http://127.0.0.1:8000/pods/");
 
-window.onload = getCount();
-
-(function () {
+    if (response.ok) {
+      let pods = (await response.json()).pods;
+      console.log(pods);
+      for (var i = 0; i < pods.length; i++) {
+        var ship_element = document.getElementById('ships');
+        var ship = document.createElement("div");
+        ship.className = "ship";
+        ship.id = pods[i];
+        ship.innerHTML = "<img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\">";
+        ship_element.appendChild(ship);
+      }
+    } else {
+      alert("HTTP-Error: " + response.status);
+    }
 
   //要素の取得
   var elements = document.getElementsByClassName("ship");
@@ -15,8 +27,6 @@ window.onload = getCount();
   island[1][0].getBoundingClientRect(),
   island[2][0].getBoundingClientRect(),
   island[3][0].getBoundingClientRect()];
-  var house = document.getElementsByClassName("house")[0];
-  var house_rect = house.getBoundingClientRect();
   var onisland1 = 0;
   var onisland2 = 0;
   var onisland3 = 0;
@@ -99,16 +109,12 @@ window.onload = getCount();
     }
     for (let i = 0; i < elements.length; i++) {
       var ship_rect = elements[i].getBoundingClientRect();
-      if (detectCollision(ship_rect, house_rect)) {
-        window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html';
-      } else {
-        for (let j = 0; j < island_rect.length; j++) {
-          if (detectCollision(island_rect[j], ship_rect)) {
-            elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
-            elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
-            island[j][0].style.backgroundColor = '#33FF00';
-            break;
-          }
+      for (let j = 0; j < island_rect.length; j++) {
+        if (detectCollision(island_rect[j], ship_rect)) {
+          elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
+          elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
+          island[j][0].style.backgroundColor = '#33FF00';
+          break;
         }
       }
     }
@@ -151,19 +157,6 @@ function GetQueryString() {
   return null;
 }
 
-//船と島の個数確認
-function getCount() {
-  var params = GetQueryString();
-
-  IslandNum = params["IslandNum"];
-  ShipNum = params["ShipNum"];
-
-  console.log(IslandNum);
-  console.log(ShipNum);
-
-  addShip();
-}
-
 
 function moveNewPage() {
   var nextUrl = "https://cloud-native-dojo.github.io/front-moc-2022/dock/dock.html"
@@ -190,9 +183,4 @@ function displayShip() {
   ship1.innerHTML = "<div class=\"ship\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\"></div>";
 }
 
-//ShipNumが0より多きければ船の表示関数を起動
-function addShip() {
-  if (ShipNum > 0) {
-    displayShip();
-  }
-}
+
