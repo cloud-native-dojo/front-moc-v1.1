@@ -11,6 +11,7 @@ var all_ports = [document.getElementById("island1_port"),
               document.getElementById("island2_port"),
               document.getElementById("island3_port"),
               document.getElementById("island4_port")]
+var ship_box = document.getElementById("ship_box").getBoundingClientRect();
 
 for(var i=0;i < island.length;i++){
   island[i][0].style.visibility = "hidden";
@@ -130,7 +131,10 @@ var onisland4 = 0;
     for (let i = 0; i < elements.length; i++) {
       var ship_rect = elements[i].getBoundingClientRect();
       for (let j = 0; j < island_rect.length; j++) {
-        if (detectCollision(island_rect[j], ship_rect)) {
+        if (detectCollision(ship_box, ship_rect)){
+          console.log("in_box")
+        } 
+        else if (detectCollision(island_rect[j], ship_rect)) {
           elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
           elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
           island[j][0].style.backgroundColor = '#33FF00';

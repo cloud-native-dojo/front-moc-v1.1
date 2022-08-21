@@ -102,22 +102,21 @@
   visibility: hidden;
 }
 
-.house {
+#ship_box {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50px;
-  height: 50px;
-  margin: -25px 0 0 -25px;
-  background-color: #faf82d;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
 }
 
 .ship {
   cursor: move;
   position: absolute;
   z-index: 1000;
-  top: 50%;
-  left: 50%;
+  top: 32%;
+  left: 46%;
 }
 
 .drag {
