@@ -116,10 +116,13 @@
   cursor: move;
   position: absolute;
   z-index: 1000;
+  top: 50%;
+  left: 50%;
 }
 
 .drag {
   z-index: 1001;
+
 }
 
 .message {
