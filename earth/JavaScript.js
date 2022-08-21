@@ -1,3 +1,21 @@
+var elements = document.getElementsByClassName("ship");
+var island = [document.getElementsByClassName("island1"),
+              document.getElementsByClassName("island2"),
+              document.getElementsByClassName("island3"),
+              document.getElementsByClassName("island4")];
+var island_rect = [island[0][0].getBoundingClientRect(),
+                    island[1][0].getBoundingClientRect(),
+                    island[2][0].getBoundingClientRect(),
+                    island[3][0].getBoundingClientRect()];
+var all_ports = [document.getElementById("island1_port"),
+              document.getElementById("island2_port"),
+              document.getElementById("island3_port"),
+              document.getElementById("island4_port")]
+var onisland1 = 0;
+var onisland2 = 0;
+var onisland3 = 0;
+var onisland4 = 0;
+
 (async function () {
   console.log("test");
   let response = await fetch("http://127.0.0.1:8000/pods/");
@@ -22,28 +40,12 @@
   if (get_ports.ok) {
     let ports = (await get_ports.json()).sugessted_port;
     console.log(ports);
-    document.getElementById("island1_port").innerText = ports[0];
-    document.getElementById("island2_port").innerText = ports[1];
-    document.getElementById("island3_port").innerText = ports[2];
-    document.getElementById("island4_port").innerText = ports[3];
+    for(var i=0; i < all_ports.length;i++){
+      all_ports[i].innerText = ports[i];
+    }
   } else {
     alert("HTTP-Error: " + response.status);
   }
-
-  //要素の取得
-  var elements = document.getElementsByClassName("ship");
-  var island = [document.getElementsByClassName("island1"),
-  document.getElementsByClassName("island2"),
-  document.getElementsByClassName("island3"),
-  document.getElementsByClassName("island4")];
-  var island_rect = [island[0][0].getBoundingClientRect(),
-  island[1][0].getBoundingClientRect(),
-  island[2][0].getBoundingClientRect(),
-  island[3][0].getBoundingClientRect()];
-  var onisland1 = 0;
-  var onisland2 = 0;
-  var onisland3 = 0;
-  var onisland4 = 0;
 
   //要素内のクリックされた位置を取得するグローバル（のような）変数
   var x;
@@ -178,16 +180,27 @@ function moveNewPage() {
 }
 
 function addIsland() {
-  console.log(location.href);
-  islandurl = url.substr(0, url.indexOf("?IslandNum="));
-  window.location.href = url + "?IslandNum=" + String(IslandNum)
+  console.log("add");
+  island[0][0].classList.toggle('active');
+  for (var i = 0; i < island.length; i++) {
+    if (window.getComputedStyle(island[i][0]).visibility == "hidden") {
+      island[i][0].style.visibility = "visible";
+      all_ports[i].style.visibility = "visible";
+      break;
+    }
+  }
 }
 
 function deleteIsland() {
-  IslandNum = params.get("IslandNum");
-  IslandNum--;
-  //url = url.substr(0, str.indexOf("?IslandNum="));
-  window.location.href = url + "?IslandNum=" + String(IslandNum)
+  console.log("delete");
+  for (var i = island.length-1; i > -1; i--) {
+    console.log(i);
+    if (window.getComputedStyle(island[i][0]).visibility == "visible") {
+      island[i][0].style.visibility = "hidden";
+      all_ports[i].style.visibility = "hidden";
+      break;
+    }
+  }
 }
 
 //船を表示させるための関数
