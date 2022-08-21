@@ -56,7 +56,7 @@
   transform: skewX(20deg);
 }
 
-.island1_port {
+#island1_port {
   position: absolute;
   top: 5%;
   left: 8%;
@@ -65,7 +65,7 @@
   font-weight: bold;
 }
 
-.island2_port {
+#island2_port {
   position: absolute;
   top: 55%;
   left: 62%;
@@ -74,7 +74,7 @@
   font-weight: bold;
 }
 
-.island3_port {
+#island3_port {
   position: absolute;
   top: 55%;
   left: 8%;
@@ -84,7 +84,7 @@
   font-weight: bold;
 }
 
-.island4_port {
+#island4_port {
   position: absolute;
   top: 5%;
   left: 62%;

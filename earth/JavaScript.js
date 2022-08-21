@@ -1,21 +1,34 @@
 (async function () {
-    console.log("test");
-    let response = await fetch("http://127.0.0.1:8000/pods/");
+  console.log("test");
+  let response = await fetch("http://127.0.0.1:8000/pods/");
 
-    if (response.ok) {
-      let pods = (await response.json()).pods;
-      console.log(pods);
-      for (var i = 0; i < pods.length; i++) {
-        var ship_element = document.getElementById('ships');
-        var ship = document.createElement("div");
-        ship.className = "ship";
-        ship.id = pods[i];
-        ship.innerHTML = "<img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\">";
-        ship_element.appendChild(ship);
-      }
-    } else {
-      alert("HTTP-Error: " + response.status);
+  if (response.ok) {
+    let pods = (await response.json()).pods;
+    console.log(pods);
+    for (var i = 0; i < pods.length; i++) {
+      var ship_element = document.getElementById('ships');
+      var ship = document.createElement("div");
+      ship.className = "ship";
+      ship.id = pods[i];
+      ship.innerHTML = "<img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\">";
+      ship_element.appendChild(ship);
     }
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
+
+  let get_ports = await fetch("http://127.0.0.1:8000/ports_suggest/");
+
+  if (get_ports.ok) {
+    let ports = (await get_ports.json()).sugessted_port;
+    console.log(ports);
+    document.getElementById("island1_port").innerText = ports[0];
+    document.getElementById("island2_port").innerText = ports[1];
+    document.getElementById("island3_port").innerText = ports[2];
+    document.getElementById("island4_port").innerText = ports[3];
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
 
   //要素の取得
   var elements = document.getElementsByClassName("ship");
