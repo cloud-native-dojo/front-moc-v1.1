@@ -26,7 +26,6 @@ var onisland3 = 0;
 var onisland4 = 0;
 
 (async function () {
-  console.log("test");
   let response = await fetch("http://127.0.0.1:8000/pods/");
 
   if (response.ok) {
@@ -44,9 +43,7 @@ var onisland4 = 0;
     alert("HTTP-Error: " + response.status);
   }
 
-  for (let i = 0; i < elements.length; i++) {
-    ship_rect[i] = elements[i].getBoundingClientRect();
-  }
+  console.log(ship_rect);
 
   let get_ports = await fetch("http://127.0.0.1:8000/ports_suggest/");
 
@@ -72,10 +69,13 @@ var onisland4 = 0;
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.top = save_data.ship[elements[i].id].split(" ")[0] + "px";
       elements[i].style.left = save_data.ship[elements[i].id].split(" ")[1] + "px";
+      ship_rect[i] = elements[i].getBoundingClientRect();
     }
   } else {
     alert("HTTP-Error: " + response.status);
   }
+  check_island();
+  save();
   //要素内のクリックされた位置を取得するグローバル（のような）変数
   var x;
   var y;
@@ -172,7 +172,6 @@ function check_island() {
   for (let j = 0; j < island_rect.length; j++) {
     for (let i = 0; i < elements.length; i++) {
       if (detectCollision(ship_box, ship_rect[i])) {
-        console.log("in_box")
       }
       else if (detectCollision(island_rect[j], ship_rect[i]) && island[j][0].classList.contains("bind") == false && window.getComputedStyle(island[j][0]).visibility == "visible") {
         console.log(island[j][0].classList.contains("bind"));
