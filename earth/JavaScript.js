@@ -129,9 +129,9 @@ var onisland4 = 0;
       island[j][0].style.backgroundColor = '#CCCCCC';
       island[j][0].classList.remove("bind"); 
     }
-    for (let i = 0; i < elements.length; i++) {
-      var ship_rect = elements[i].getBoundingClientRect();
-      for (let j = 0; j < island_rect.length; j++) {
+    for (let j = 0; j < island_rect.length; j++) {
+      for (let i = 0; i < elements.length; i++) {
+        var ship_rect = elements[i].getBoundingClientRect();
         if (detectCollision(ship_box, ship_rect)){
           console.log("in_box")
         } 
