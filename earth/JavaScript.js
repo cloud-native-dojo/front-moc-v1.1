@@ -53,6 +53,18 @@ var onisland4 = 0;
     alert("HTTP-Error: " + response.status);
   }
 
+  let get_save = await fetch("http://127.0.0.1:8000/save/");
+
+  if (get_save.ok) {
+    let save_data = (await response).data;
+    console.log("data" + save_data);
+    for (let i = 0; i < island.length; i++) {
+      //window.getComputedStyle(island[i][0]).visibility=island[i];
+    }
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
+
   //要素内のクリックされた位置を取得するグローバル（のような）変数
   var x;
   var y;
@@ -125,9 +137,12 @@ var onisland4 = 0;
     document.body.removeEventListener("touchmove", mmove, false);
     drag.removeEventListener("touchend", mup, false);
 
+    save_message = { "island": {}, "ship": {} };
+
     for (let j = 0; j < island_rect.length; j++) {
       island[j][0].style.backgroundColor = '#CCCCCC';
       island[j][0].classList.remove("bind"); 
+      save_message.island[j] = window.getComputedStyle(island[j][0]).visibility;
     }
     for (let j = 0; j < island_rect.length; j++) {
       for (let i = 0; i < elements.length; i++) {
@@ -140,15 +155,34 @@ var onisland4 = 0;
           elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
           elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
           island[j][0].style.backgroundColor = '#33FF00';
+
+          post_data('http://127.0.0.1:8000/services/',
+            {
+              "port": all_ports[j].innerText,
+              "name": elements[i].id
+            }
+            )
+            .then(data => {
+              console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
+            });
+
           let link = document.getElementById('island' + (j+1) + '_link');
           console.log(link)
           let url = 'http://10.204.227.151:' + all_ports[j].innerText;
           link.setAttribute('href', url);
-          island[j][0].classList.add("bind"); 	
+          island[j][0].classList.add("bind");
+          save_message.ship[elements[i].id] = ship_rect.top + " " + ship_rect.left;
           break;
         }
       }
     }
+    console.log(save_message);
+    post_data('http://127.0.0.1:8000/save/', save_message
+    )
+      .then(data => {
+        console.log("post:" + data.data); // `data.json()` の呼び出しで解釈された JSON データ
+      });
+
 
     //クラス名 .drag も消す
     drag.classList.remove("drag");
@@ -211,7 +245,7 @@ function deleteIsland() {
   console.log("delete");
   for (var i = island.length-1; i > -1; i--) {
     console.log(i);
-    if (window.getComputedStyle(island[i][0]).visibility == "visible") {
+    if (window.getComputedStyle(island[i][0]).visibility == "visible" && island[i][0].classList.contains("bind") == false) {
       island[i][0].style.visibility = "hidden";
       all_ports[i].style.visibility = "hidden";
       break;
@@ -220,9 +254,24 @@ function deleteIsland() {
 }
 
 //船を表示させるための関数
-function displayShip() {
-  var ship1 = document.getElementById("ship1");
-  ship1.innerHTML = "<div class=\"ship\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\"></div>";
+
+async function post_data(url = '', data = {}) {
+  // 既定のオプションには * が付いています
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
+  })
+  return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
 }
+
 
 
