@@ -102,11 +102,13 @@
 
 #ship_box {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 150px;
-  margin: -75px 0 0 -75px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 300px;
+  height: 300px;
 }
 
 .ship {
