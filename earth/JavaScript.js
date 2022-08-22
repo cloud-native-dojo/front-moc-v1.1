@@ -13,10 +13,13 @@ var all_ports = [document.getElementById("island1_port"),
               document.getElementById("island4_port")]
 var ship_box = document.getElementById("ship_box").getBoundingClientRect();
 
+var ship_rect = [];
+
 for(var i=0;i < island.length;i++){
   island[i][0].style.visibility = "hidden";
   all_ports[i].style.visibility = "hidden";
 }
+
 var onisland1 = 0;
 var onisland2 = 0;
 var onisland3 = 0;
@@ -41,12 +44,16 @@ var onisland4 = 0;
     alert("HTTP-Error: " + response.status);
   }
 
+  for (let i = 0; i < elements.length; i++) {
+    ship_rect[i] = elements[i].getBoundingClientRect();
+  }
+
   let get_ports = await fetch("http://127.0.0.1:8000/ports_suggest/");
 
   if (get_ports.ok) {
     let ports = (await get_ports.json()).sugessted_port;
     console.log(ports);
-    for(var i=0; i < all_ports.length;i++){
+    for (var i = 0; i < all_ports.length; i++) {
       all_ports[i].innerText = ports[i];
     }
   } else {
@@ -56,15 +63,19 @@ var onisland4 = 0;
   let get_save = await fetch("http://127.0.0.1:8000/save/");
 
   if (get_save.ok) {
-    let save_data = (await response).data;
-    console.log("data" + save_data);
+    let save_data = (await get_save.json()).data;
+    console.log(save_data);
     for (let i = 0; i < island.length; i++) {
-      //window.getComputedStyle(island[i][0]).visibility=island[i];
+      island[i][0].style.visibility = save_data.island[i];
+      all_ports[i].style.visibility = save_data.island[i];
+    }
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.top = save_data.ship[elements[i].id].split(" ")[0] + "px";
+      elements[i].style.left = save_data.ship[elements[i].id].split(" ")[1] + "px";
     }
   } else {
     alert("HTTP-Error: " + response.status);
   }
-
   //要素内のクリックされた位置を取得するグローバル（のような）変数
   var x;
   var y;
@@ -77,7 +88,6 @@ var onisland4 = 0;
 
   //マウスが押された際の関数
   function mdown(e) {
-    console.log("mdown");
 
     //クラス名に .drag を追加
     this.classList.add("drag");
@@ -100,7 +110,6 @@ var onisland4 = 0;
 
   //マウスカーソルが動いたときに発火
   function mmove(e) {
-    console.log("mmove");
     //ドラッグしている要素を取得
     var drag = document.getElementsByClassName("drag")[0];
 
@@ -128,8 +137,11 @@ var onisland4 = 0;
 
   //マウスボタンが上がったら発火
   function mup(e) {
-    console.log("mup");
-    var drag = document.getElementsByClassName("drag")[0];
+    try {
+      var drag = document.getElementsByClassName("drag")[0];
+    } catch(e){
+
+    }
 
     //ムーブベントハンドラの消去
     document.body.removeEventListener("mousemove", mmove, false);
@@ -137,70 +149,86 @@ var onisland4 = 0;
     document.body.removeEventListener("touchmove", mmove, false);
     drag.removeEventListener("touchend", mup, false);
 
-    save_message = { "island": {}, "ship": {} };
-
-    for (let j = 0; j < island_rect.length; j++) {
-      island[j][0].style.backgroundColor = '#CCCCCC';
-      island[j][0].classList.remove("bind"); 
-      save_message.island[j] = window.getComputedStyle(island[j][0]).visibility;
+    for (let i = 0; i < elements.length; i++) {
+      ship_rect[i] = elements[i].getBoundingClientRect();
     }
-    for (let j = 0; j < island_rect.length; j++) {
-      for (let i = 0; i < elements.length; i++) {
-        var ship_rect = elements[i].getBoundingClientRect();
-        if (detectCollision(ship_box, ship_rect)){
-          console.log("in_box")
-        } 
-        else if (detectCollision(island_rect[j], ship_rect) && island[j][0].classList.contains("bind") == false ) {
-          console.log(island[j][0].classList.contains("bind"));
-          elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
-          elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
-          island[j][0].style.backgroundColor = '#33FF00';
 
-          post_data('http://127.0.0.1:8000/services/',
-            {
-              "port": all_ports[j].innerText,
-              "name": elements[i].id
-            }
-            )
-            .then(data => {
-              console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
-            });
-
-          let link = document.getElementById('island' + (j+1) + '_link');
-          console.log(link)
-          let url = 'http://10.204.227.151:' + all_ports[j].innerText;
-          link.setAttribute('href', url);
-          island[j][0].classList.add("bind");
-          save_message.ship[elements[i].id] = ship_rect.top + " " + ship_rect.left;
-          break;
-        }
-      }
-    }
-    console.log(save_message);
-    post_data('http://127.0.0.1:8000/save/', save_message
-    )
-      .then(data => {
-        console.log("post:" + data.data); // `data.json()` の呼び出しで解釈された JSON データ
-      });
-
+    check_island();
+    
+    save();
 
     //クラス名 .drag も消す
     drag.classList.remove("drag");
   }
 
-  function detectCollision(rect1, rect2) {
-    if (((rect1.left + window.pageXOffset <= rect2.left + window.pageXOffset && rect2.left + window.pageXOffset <= rect1.right + window.pageXOffset) ||
-      (rect1.left + window.pageXOffset <= rect2.right + window.pageXOffset && rect2.right + window.pageXOffset <= rect1.right + window.pageXOffset)) &&
-      ((rect1.top + window.pageYOffset <= rect2.top + window.pageYOffset && rect2.top + window.pageYOffset <= rect1.bottom + window.pageYOffset) ||
-        (rect1.top + window.pageYOffset <= rect2.bottom + window.pageYOffset && rect2.bottom + window.pageYOffset <= rect1.bottom + window.pageYOffset))
-    ) {
-      return true;
-    } else {
-      return false;
+})()
+
+
+function check_island() {
+  for (let j = 0; j < island_rect.length; j++) {
+    island[j][0].style.backgroundColor = '#CCCCCC';
+    island[j][0].classList.remove("bind");
+  }
+  for (let j = 0; j < island_rect.length; j++) {
+    for (let i = 0; i < elements.length; i++) {
+      if (detectCollision(ship_box, ship_rect[i])) {
+        console.log("in_box")
+      }
+      else if (detectCollision(island_rect[j], ship_rect[i]) && island[j][0].classList.contains("bind") == false && window.getComputedStyle(island[j][0]).visibility == "visible") {
+        console.log(island[j][0].classList.contains("bind"));
+        elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
+        elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
+        island[j][0].style.backgroundColor = '#33FF00';
+
+        post_data('http://127.0.0.1:8000/services/',
+          {
+            "port": all_ports[j].innerText,
+            "name": elements[i].id
+          }
+        )
+          .then(data => {
+            console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
+          });
+
+        let link = document.getElementById('island' + (j + 1) + '_link');
+        console.log(link)
+        let url = 'http://10.204.227.151:' + all_ports[j].innerText;
+        link.setAttribute('href', url);
+        island[j][0].classList.add("bind");
+        break;
+      }
     }
   }
+}
 
-})()
+function detectCollision(rect1, rect2) {
+  if (((rect1.left + window.pageXOffset <= rect2.left + window.pageXOffset && rect2.left + window.pageXOffset <= rect1.right + window.pageXOffset) ||
+    (rect1.left + window.pageXOffset <= rect2.right + window.pageXOffset && rect2.right + window.pageXOffset <= rect1.right + window.pageXOffset)) &&
+    ((rect1.top + window.pageYOffset <= rect2.top + window.pageYOffset && rect2.top + window.pageYOffset <= rect1.bottom + window.pageYOffset) ||
+      (rect1.top + window.pageYOffset <= rect2.bottom + window.pageYOffset && rect2.bottom + window.pageYOffset <= rect1.bottom + window.pageYOffset))
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function save() {
+  save_message = { "island": {}, "ship": {} };
+  for (let i = 0; i < island.length; i++) {
+    save_message.island[i] = window.getComputedStyle(island[i][0]).visibility;
+  }
+  for (let i = 0; i < elements.length; i++) {
+    save_message.ship[elements[i].id] = ship_rect[i].top + " " + ship_rect[i].left;
+  }
+  post_data('http://127.0.0.1:8000/save/', save_message
+  )
+    .then(data => {
+      console.log(data.data); // `data.json()` の呼び出しで解釈された JSON データ
+    }
+  );
+  
+}
 
 //urlのパラメーター取得
 function GetQueryString() {
@@ -236,6 +264,7 @@ function addIsland() {
     if (window.getComputedStyle(island[i][0]).visibility == "hidden") {
       island[i][0].style.visibility = "visible";
       all_ports[i].style.visibility = "visible";
+      save();
       break;
     }
   }
@@ -244,10 +273,10 @@ function addIsland() {
 function deleteIsland() {
   console.log("delete");
   for (var i = island.length-1; i > -1; i--) {
-    console.log(i);
     if (window.getComputedStyle(island[i][0]).visibility == "visible" && island[i][0].classList.contains("bind") == false) {
       island[i][0].style.visibility = "hidden";
       all_ports[i].style.visibility = "hidden";
+      save();
       break;
     }
   }
@@ -272,6 +301,3 @@ async function post_data(url = '', data = {}) {
   })
   return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
 }
-
-
-
