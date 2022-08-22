@@ -127,6 +127,7 @@ var onisland4 = 0;
 
     for (let j = 0; j < island_rect.length; j++) {
       island[j][0].style.backgroundColor = '#CCCCCC';
+      island[j][0].classList.remove("bind"); 
     }
     for (let i = 0; i < elements.length; i++) {
       var ship_rect = elements[i].getBoundingClientRect();
@@ -134,10 +135,16 @@ var onisland4 = 0;
         if (detectCollision(ship_box, ship_rect)){
           console.log("in_box")
         } 
-        else if (detectCollision(island_rect[j], ship_rect)) {
+        else if (detectCollision(island_rect[j], ship_rect) && island[j][0].classList.contains("bind") == false ) {
+          console.log(island[j][0].classList.contains("bind"));
           elements[i].style.top = island_rect[j].top + (island_rect[j].bottom - island_rect[j].top) / 4 + "px";
           elements[i].style.left = island_rect[j].left + (island_rect[j].right - island_rect[j].left) / 4 + 20 + "px";
           island[j][0].style.backgroundColor = '#33FF00';
+          let link = document.getElementById('island' + (j+1) + '_link');
+          console.log(link)
+          let url = 'http://10.204.227.151:' + all_ports[j].innerText;
+          link.setAttribute('href', url);
+          island[j][0].classList.add("bind"); 	
           break;
         }
       }
