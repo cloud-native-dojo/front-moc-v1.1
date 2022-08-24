@@ -12,6 +12,7 @@ var all_ports = [document.getElementById("island1_port"),
               document.getElementById("island3_port"),
               document.getElementById("island4_port")]
 var ship_box = document.getElementById("ship_box").getBoundingClientRect();
+var delete_box = document.getElementsByClassName("delete_ship")[0].getBoundingClientRect();
 
 var ship_rect = [];
 
@@ -30,14 +31,16 @@ var onisland4 = 0;
 
   if (response.ok) {
     let pods = (await response.json()).pods;
-    console.log(pods);
-    for (var i = 0; i < pods.length; i++) {
-      var ship_element = document.getElementById('ships');
-      var ship = document.createElement("div");
-      ship.className = "ship";
-      ship.id = pods[i];
-      ship.innerHTML = "<img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\">";
-      ship_element.appendChild(ship);
+    if (pods[0] != ""){
+      console.log(pods);
+      for (var i = 0; i < pods.length; i++) {
+        var ship_element = document.getElementById('ships');
+        var ship = document.createElement("div");
+        ship.className = "ship";
+        ship.id = pods[i];
+        ship.innerHTML = "<img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\">";
+        ship_element.appendChild(ship);
+      }
     }
   } else {
     alert("HTTP-Error: " + response.status);
@@ -51,7 +54,7 @@ var onisland4 = 0;
     let ports = (await get_ports.json()).sugessted_port;
     console.log(ports);
     for (var i = 0; i < all_ports.length; i++) {
-      all_ports[i].innerText = ports[i];
+      all_ports[i].innerText = "port:" + ports[i];
     }
   } else {
     alert("HTTP-Error: " + response.status);
@@ -175,6 +178,11 @@ function check_island() {
 
   for (let j = 0; j < island_rect.length; j++) {
     for (let i = 0; i < elements.length; i++) {
+      if (detectCollision(ship_rect[i],delete_box)) {
+        console.log(elements[i].id);
+        deleteShip(elements[i].id);
+        elements[i].remove();
+      }
       if (detectCollision(ship_box, ship_rect[i]) == false 
         && detectCollision(island_rect[j], ship_rect[i]) 
         && island[j][0].classList.contains("bind") == false 
@@ -289,12 +297,41 @@ function deleteIsland() {
   }
 }
 
+function deleteShip(ShipName) {
+  delete_data('http://127.0.0.1:8000/pods/',
+  {
+    "name":ShipName
+  })
+    .then(data => {
+      console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
+    });
+}
+
+
 //船を表示させるための関数
 
 async function post_data(url = '', data = {}) {
   // 既定のオプションには * が付いています
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
+  })
+  return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
+}
+
+async function delete_data(url = '', data = {}) {
+  // 既定のオプションには * が付いています
+  const response = await fetch(url, {
+    method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'same-origin', // include, *same-origin, omit

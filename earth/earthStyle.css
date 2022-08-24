@@ -147,6 +147,12 @@
   border: 5px solid black;
 }
 
+.delete_ship {
+  position: fixed;
+  bottom: 20%;
+  left: 0;
+  background-color: red;
+}
 
 .btn_msg {
   color: inherit;
