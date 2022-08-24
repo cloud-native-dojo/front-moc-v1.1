@@ -38,7 +38,15 @@ var onisland4 = 0;
         var ship = document.createElement("div");
         ship.className = "ship";
         ship.id = pods[i];
-        ship.innerHTML = "<img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\">";
+
+        let bgcode = (await sha256(pods[i]))
+        
+        bgcode = "#" + bgcode.slice(0,6);
+
+        console.log(bgcode)
+
+        ship.innerHTML = "<div style='background:" + bgcode + ";'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"80\" height=\"80\"><div>";
+
         ship_element.appendChild(ship);
       }
     }
@@ -344,4 +352,10 @@ async function delete_data(url = '', data = {}) {
     body: JSON.stringify(data) // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
   })
   return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
+}
+
+async function sha256(text) {
+  const uint8 = new TextEncoder().encode(text)
+  const digest = await crypto.subtle.digest('SHA-256', uint8)
+  return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2, '0')).join('')
 }
