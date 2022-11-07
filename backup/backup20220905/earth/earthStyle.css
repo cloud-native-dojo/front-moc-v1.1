@@ -1,3 +1,4 @@
+
 .circle1 {
   position: relative;
   width: 900px;
@@ -265,4 +266,14 @@
   height: 100%;
   top: 0;
   left: 0;
+}
+
+/* 光らせる */
+#pika-box {
+  transition: background-color 1s;
+}
+
+#pika-box.highlight {
+  background-color: #FF3333;
+  transition-duration: 0s;
 }

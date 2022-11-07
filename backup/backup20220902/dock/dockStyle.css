@@ -1,0 +1,146 @@
+.message {
+  font-size: 50px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* 船 */
+.ship {
+  height: 400px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.message {
+  text-align: center;
+}
+
+.dropzone {
+  margin: 0 auto;
+  border: 3px solid;
+  box-sizing: border-box;
+  display: flex;
+  align-items: left;
+  justify-content: flex-end;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 900px;
+  height: 335px;
+  position: relative;
+}
+
+.next_btn {
+  text-align: right;
+}
+
+.next_btn_msg {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ship-base {
+  position: relative;
+  margin: 0 auto;
+  width: 800px;
+  border-top: 200px solid #a9a9a9;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+}
+
+/* コンテナ */
+.example-parent {
+  border: 3px solid;
+  color: black;
+  display: flex;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.example-origin {
+  flex-basis: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.example-draggable {
+  background-color: #4AAE9B;
+  border: 3px solid;
+  font-weight: normal;
+  text-align: center;
+  margin: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  width: 200px;
+  height: 80px;
+  padding: 10px;
+}
+
+.demo-box {
+  border: 3px dashed;
+  font-weight: normal;
+  text-align: center;
+  margin: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  width: 200px;
+  height: 80px;
+  padding: 10px;
+  font-size: 40px;
+  color: #000;
+  opacity: 0.4;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  z-index: -1;
+}
+
+.input-shipname {
+  text-align: center;
+  font-size: 30px;
+}
+
+.container-box {
+  font-size: 30px;
+}
+
+.title {
+  font-size: 40px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: left;
+}
+
+.message {
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: left;
+}
+
+#pika-box {
+  transition: background-color 1s;
+}
+
+#pika-box.highlight {
+  background-color: #FF3333;
+  transition-duration: 0s;
+}
+
+#animated {
+
+  animation: move-y .8s infinite alternate ease-in-out;
+  display: inline-block;
+}
+
+@keyframes move-y {
+  from {
+    transform: translateY(-200px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}

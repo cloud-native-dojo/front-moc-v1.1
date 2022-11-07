@@ -251,9 +251,7 @@ function check_island() {
     island[j][0].style.backgroundColor = '#CCCCCC';
     island[j][0].classList.remove("bind");
   }
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].classList.remove("bind");
-  }
+
   for (let j = 0; j < island_rect.length; j++) {
     for (let i = 0; i < elements.length; i++) {
       var delete_box = document.getElementsByClassName("delete_ship")[0].getBoundingClientRect();
@@ -302,26 +300,20 @@ function check_island() {
         let url = 'http://10.204.227.151:' + all_ports[j].innerText;
         link.setAttribute('href', url.replace(":port", ""));
         island[j][0].classList.add("bind");
-        elements[i].classList.add("bind");
         break;
       } else {
-        island[j][0].style.backgroundColor = '#CCCCCC';
-        island[j][0].classList.remove("bind");
-      }
-      for (let i = 0; i < elements.length; i++) {
-        if (elements[i].classList.contains("bind") == false) {
-          console.log("send:"+ elements[i].id)
-          post_data('http://10.204.227.162:8000/services/',
-            {
-              // "port": all_ports[j].innerText,
-              "port": -1,
-              "name": elements[i].id
-            }
-          )
+        post_data('http://10.204.227.162:8000/services/',
+          {
+            // "port": all_ports[j].innerText,
+            "port": -1,
+            "name": elements[i].id
+          }
+        )
           .then(data => {
             console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
           });
-        }
+        island[j][0].style.backgroundColor = '#CCCCCC';
+        island[j][0].classList.remove("bind");
       }
       if (ship_rect[i].top > document.documentElement.clientHeight) {
         elements[i].style.top = "0px";

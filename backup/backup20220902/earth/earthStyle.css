@@ -1,3 +1,7 @@
+body {
+  width: 1880px;
+}
+
 .circle1 {
   position: relative;
   width: 900px;
@@ -206,7 +210,7 @@
   left: 0;
   margin: 5px;
   border: 5px solid black;
-  animation: blinkEffect 2s ease infinite;
+  animation: blinkEffect 1s ease infinite;
 }
 
 @keyframes blinkEffect {
@@ -214,12 +218,8 @@
     opacity: 0;
   }
 
-  50% {
-    opacity: 1;
-  }
-
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 
@@ -235,7 +235,6 @@
   position: fixed;
   bottom: 20%;
   left: 0;
-  width: 400px;
   height: 300px;
   background-color: red;
 }
@@ -265,4 +264,14 @@
   height: 100%;
   top: 0;
   left: 0;
+}
+
+/* 光らせる */
+#pika-box {
+  transition: background-color 1s;
+}
+
+#pika-box.highlight {
+  background-color: #FF3333;
+  transition-duration: 0s;
 }

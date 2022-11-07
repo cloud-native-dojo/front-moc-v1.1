@@ -74,10 +74,10 @@ const cyrb53 = function (str, seed = 0) {
         let text_color = luminance > 50 ? "#000000" : "#ffffff";
         console.log("text color:", text_color);
         if (luminance > 50) {
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;' id='loading_" + pods[i] + "'>loading</p><div>";
         }
         else {
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;' id='loading_" + pods[i] + "'>loading</p><div>";
         }
 
         ship_element.appendChild(ship);
@@ -122,7 +122,6 @@ const cyrb53 = function (str, seed = 0) {
   } else {
     alert("HTTP-Error: " + response.status);
   }
-  check_status();
   check_island();
   save();
   //要素内のクリックされた位置を取得するグローバル（のような）変数
@@ -213,11 +212,8 @@ const cyrb53 = function (str, seed = 0) {
       drag.classList.remove("drag");
     } catch (e) { }
   }
-  setInterval(check_status, 3000);
 
-})()
-
-async function check_status() {
+  async function check_status() {
     console.log("called: check_status()");
 
     let result = await fetch("http://10.204.227.162:8000/pods/status/");
@@ -245,15 +241,16 @@ async function check_status() {
     }
   }
 
+  setInterval(check_status, 3000);
+
+})()
 
 function check_island() {
   for (let j = 0; j < island_rect.length; j++) {
     island[j][0].style.backgroundColor = '#CCCCCC';
     island[j][0].classList.remove("bind");
   }
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].classList.remove("bind");
-  }
+
   for (let j = 0; j < island_rect.length; j++) {
     for (let i = 0; i < elements.length; i++) {
       var delete_box = document.getElementsByClassName("delete_ship")[0].getBoundingClientRect();
@@ -302,26 +299,10 @@ function check_island() {
         let url = 'http://10.204.227.151:' + all_ports[j].innerText;
         link.setAttribute('href', url.replace(":port", ""));
         island[j][0].classList.add("bind");
-        elements[i].classList.add("bind");
         break;
       } else {
         island[j][0].style.backgroundColor = '#CCCCCC';
         island[j][0].classList.remove("bind");
-      }
-      for (let i = 0; i < elements.length; i++) {
-        if (elements[i].classList.contains("bind") == false) {
-          console.log("send:"+ elements[i].id)
-          post_data('http://10.204.227.162:8000/services/',
-            {
-              // "port": all_ports[j].innerText,
-              "port": -1,
-              "name": elements[i].id
-            }
-          )
-          .then(data => {
-            console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
-          });
-        }
       }
       if (ship_rect[i].top > document.documentElement.clientHeight) {
         elements[i].style.top = "0px";

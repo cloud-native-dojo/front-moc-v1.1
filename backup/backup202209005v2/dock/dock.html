@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dock UI</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="dockStyle.css" />
+  <script src="https://kit.fontawesome.com/e8b176f8ab.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div id="load">
+    <div id="loader"></div>
+  </div>
+
+
+  <!---
+  <a href="javascript:getPodData();">getPodData</a>
+  <a href="javascript:getPodData();">makewordpress Pod</a>
+  <a href="javascript:getCount();">getUrl Data</a>
+  -->
+  <h2 class="title">Dock</h2>
+  <div class="ship">
+    <h2>使いたい機能を船の上に乗せて下さい。GOを押すことによってPlanetes画面に船が追加されます。</h2>
+    <div class="dropzone" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+      <div class="demo-box" id="kara-box">here</div>
+    </div>
+    <div class="next_btn">
+      <a class="next_btn_msg" href="javascript:moveNewPage();">
+        <i class="fa-solid fa-circle-arrow-right fa-3x">Go!</i>
+      </a>
+    </div>
+  </div>
+
+  <div class="ship-base">
+    <i class="fa-solid fa-arrow-up-long fa-5x" id="animated"></i>
+    <!-- 入力欄です(仮置きなのでデザイン等直してほしいです) -->
+    <div class="input-shipname">
+      <label for="name">Ship Name</label>
+      <input type="text" id="name" name="name" required minlength="0" maxlength="20" size="10">
+    </div>
+
+  </div>
+
+  <div class="example-parent">
+    <h1 id="pika-box">Container List</h1>
+    <div class="example-origin" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+      <div id="draggable-1" class="example-draggable" draggable="true" ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)">
+        <a class="container-box">WordPress</a>
+      </div>
+      <div id="draggable-2" class="example-draggable" draggable="true" ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)">
+        <a class="container-box">Moodle</a>
+      </div>
+      <div id="draggable-3" class="example-draggable" draggable="true" ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)">
+        <a class="container-box">Media Wiki</a>
+      </div>
+      <div id="draggable-4" class="example-draggable" draggable="true" ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)">
+        <a class="container-box">rocket chat</a>
+      </div>
+      <div id="draggable-4" class="example-draggable" draggable="true" ondragstart="onDragStart(event);"
+        ondragend="onDragEnd(event)">
+        <a class="container-box">magento</a>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="script.js"></script>
+
+</html>

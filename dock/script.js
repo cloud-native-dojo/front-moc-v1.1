@@ -1,12 +1,14 @@
 let dragged = null;
 
 var btn = document.getElementById("btn");
+var shipname = document.getElementById("name")
 
 var ShipNum;
 var IslandNum;
 
+
 btn.addEventListener('click', function () {
-  window.location.href = 'https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html';
+  window.location.href = 'http://10.204.227.162/earth/earth.html';
 }, false);
 
 function onDragStart(event) {
@@ -27,11 +29,17 @@ function onDrop(event) {
     console.log("1");
     const clone = dragged.cloneNode(true);
     event.target.appendChild(clone);
+    deleteKaraBox();
   }
   else if (event.target.className === "example-origin") {
     console.log("2");
     dragged.parentNode.removeChild(dragged);
   }
+}
+
+function deleteKaraBox() {
+  var x = document.getElementById("kara-box");
+  x.parentNode.removeChild(x);
 }
 
 //urlのパラメーター取得
@@ -58,12 +66,20 @@ function onDragEnd(event) {
 }
 
 async function moveNewPage() {
-  var url = "https://cloud-native-dojo.github.io/front-moc-2022/earth/earth.html"
-  makepod('http://127.0.0.1:8000/pods/',
+  loading()
+  if (shipname.value == "") {
+    Shipname = 'ship-' + Math.floor(Math.random() * (99999 - 10000) + 10000);
+  }
+  else {
+    Shipname = shipname.value;
+  }
+  var url = "http://10.204.227.162/earth/earth.html"
+  makepod('http://10.204.227.162:8000/pods/',
     {
       "containers": {
         "wordpress": 1
-      }
+      },
+      "name": Shipname
     })
     .then(data => {
       console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
@@ -74,7 +90,7 @@ async function moveNewPage() {
 
 //Podのデータを取得する関数
 async function getPodData() {
-  let response = await fetch("http://127.0.0.1:8000/pods/");
+  let response = await fetch("http://10.204.227.162:8000/pods/");
 
   if (response.ok) {
     let json = await response.json();
@@ -102,4 +118,9 @@ async function makepod(url = '', data = {}) {
     body: JSON.stringify(data) // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
   })
   return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
+}
+
+//loading画面
+function loading() {
+  document.getElementById("load").style.display = "flex";
 }
