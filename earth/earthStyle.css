@@ -45,8 +45,12 @@
 
   border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
   background-color: #CCCCCC;
+  /*
   transform: skewX(-20deg);
+  */
+
   visibility: hidden;
+  
 }
 
 
@@ -56,9 +60,13 @@
   left: 62%;
   width: 30%;
   padding-top: 40%;
+  
   border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
   background-color: #CCCCCC;
+  /*
   transform: skewX(-20deg);
+  */
+  
   visibility: hidden;
 }
 
@@ -68,9 +76,13 @@
   left: 8%;
   width: 30%;
   padding-top: 40%;
+  
   border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
   background-color: #CCCCCC;
-  transform: skewX(20deg);
+    /*
+  transform: skewX(-20deg);
+  */
+  
   visibility: hidden;
 }
 
@@ -80,9 +92,13 @@
   left: 62%;
   width: 30%;
   padding-top: 40%;
+  
   border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
   background-color: #CCCCCC;
-  transform: skewX(20deg);
+    /*
+  transform: skewX(-20deg);
+  */
+  
   visibility: hidden;
 }
 
@@ -135,7 +151,6 @@
   visibility: hidden;
   z-index: 3
 }
-
 #island1_dock {
   position: absolute;
   width: 200px;
@@ -294,43 +309,4 @@
   height: 100%;
   top: 0;
   left: 0;
-}
-
-.tooltip {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.tooltip p {
-  margin: 0;
-  padding: 0;
-}
-
-.description {
-  display: none;
-  position: absolute;
-  padding: 10px;
-  font-size: 12px;
-  line-height: 1.6em;
-  color: #fff;
-  border-radius: 5px;
-  background: #000;
-  width: 100px;
-}
-
-.description:before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  border: 15px solid transparent;
-  border-top: 15px solid #000;
-  margin-left: -15px;
-}
-
-.tooltip:hover .description {
-  display: inline-block;
-  top: -70px;
-  left: -30px;
 }

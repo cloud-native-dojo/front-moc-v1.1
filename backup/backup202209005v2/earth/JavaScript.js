@@ -108,7 +108,7 @@ const cyrb53 = function (str, seed = 0) {
     for (let i = 0; i < island.length; i++) {
       island[i][0].style.visibility = save_data.island[i];
       all_ports[i].style.visibility = save_data.island[i];
-      all_dock[i].style.visibility = save_data.island[i];
+ 
     }
     for (let i = 0; i < elements.length; i++) {
       try {
@@ -248,7 +248,7 @@ async function check_status() {
 
 function check_island() {
   for (let j = 0; j < island_rect.length; j++) {
-    island[j][0].style.backgroundColor = '#CCCCCC';
+
     island[j][0].classList.remove("bind");
   }
 
@@ -312,7 +312,7 @@ function check_island() {
           .then(data => {
             console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
           });
-        island[j][0].style.backgroundColor = '#CCCCCC';
+      
         island[j][0].classList.remove("bind");
       }
       if (ship_rect[i].top > document.documentElement.clientHeight) {
@@ -394,7 +394,7 @@ function addIsland() {
     if (window.getComputedStyle(island[i][0]).visibility == "hidden") {
       island[i][0].style.visibility = "visible";
       all_ports[i].style.visibility = "visible";
-      all_dock[i].style.visibility = "visible";
+
       save();
       break;
     }
@@ -407,7 +407,7 @@ function deleteIsland() {
     if (window.getComputedStyle(island[i][0]).visibility == "visible" && island[i][0].classList.contains("bind") == false) {
       island[i][0].style.visibility = "hidden";
       all_ports[i].style.visibility = "hidden";
-      all_dock[i].style.visibility = "hidden";
+
       save();
       break;
     }

@@ -247,10 +247,7 @@ async function check_status() {
 
 
 function check_island() {
-  for (let j = 0; j < island_rect.length; j++) {
-    island[j][0].style.backgroundColor = '#CCCCCC';
-    island[j][0].classList.remove("bind");
-  }
+
   for (let i = 0; i < elements.length; i++) {
     elements[i].classList.remove("bind");
   }
@@ -284,8 +281,12 @@ function check_island() {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 600 + "px";
         }
+        
+        island[j][0].style.backgroundColor = '#6699FF';
+      /*
         island[j][0].style.backgroundColor = '#33FF00';
-
+        */
+        
         post_data('http://10.204.227.162:8000/services/',
           {
             // "port": all_ports[j].innerText,
@@ -305,6 +306,10 @@ function check_island() {
         elements[i].classList.add("bind");
         break;
       } else {
+        /*
+        island[j][0].style.backgroundColor = '#CCCCCC';
+        island[j][0].style.backgroundColor = '#6699FF';
+        */
         island[j][0].style.backgroundColor = '#CCCCCC';
         island[j][0].classList.remove("bind");
       }
