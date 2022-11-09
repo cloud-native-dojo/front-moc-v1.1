@@ -19,16 +19,22 @@
 
 }
 
-#island1_2{
+#island2_1{
   position: absolute;
-  top: 10%;
-  left: 10%;
+  top: 7%;
+  left: 7%;
 }
 
-#island1_3{
+#island3_1{
   position: absolute;
-  top: 10%;
-  left: 10%;
+  top: 7%;
+  left: 7%;
+}
+
+#island4_1{
+  position: absolute;
+  top: 7%;
+  left: 7%;
 }
 .island1 {
   position: absolute;
