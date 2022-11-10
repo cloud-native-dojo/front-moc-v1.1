@@ -354,7 +354,7 @@ function addIsland() {
     if (window.getComputedStyle(island[i][0]).visibility == "hidden") {
       island[i][0].style.visibility = "visible";
       all_ports[i].style.visibility = "visible";
-      all_dock[i].style.visibility = "visible";
+    
       save();
       break;
     }

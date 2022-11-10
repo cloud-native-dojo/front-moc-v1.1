@@ -11,10 +11,12 @@ var all_ports = [document.getElementById("island1_port"),
 document.getElementById("island2_port"),
 document.getElementById("island3_port"),
 document.getElementById("island4_port")]
+/*
 var all_dock = [document.getElementById("island1_dock"),
 document.getElementById("island2_dock"),
 document.getElementById("island3_dock"),
 document.getElementById("island4_dock")]
+*/
 var ship_box = document.getElementById("ship_box").getBoundingClientRect();
 
 var ship_rect = [];
