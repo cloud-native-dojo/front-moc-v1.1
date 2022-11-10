@@ -11,13 +11,13 @@ var all_ports = [document.getElementById("island1_port"),
 document.getElementById("island2_port"),
 document.getElementById("island3_port"),
 document.getElementById("island4_port")]
-
 var all_dock = [document.getElementById("island1_dock"),
 document.getElementById("island2_dock"),
 document.getElementById("island3_dock"),
 document.getElementById("island4_dock")]
-
 var ship_box = document.getElementById("ship_box").getBoundingClientRect();
+
+var ship_1 =document.getElementById("ship_1");
 
 var ship_rect = [];
 
@@ -76,10 +76,14 @@ const cyrb53 = function (str, seed = 0) {
         let text_color = luminance > 50 ? "#000000" : "#ffffff";
         console.log("text color:", text_color);
         if (luminance > 50) {
+        
           ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+        
         }
         else {
+        
           ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+        
         }
 
         ship_element.appendChild(ship);
