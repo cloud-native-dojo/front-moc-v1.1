@@ -17,8 +17,6 @@ document.getElementById("island3_dock"),
 document.getElementById("island4_dock")]
 var ship_box = document.getElementById("ship_box").getBoundingClientRect();
 
-var ship_1 =document.getElementById("ship_1");
-
 var ship_rect = [];
 
 for (var i = 0; i < island.length; i++) {
@@ -76,14 +74,11 @@ const cyrb53 = function (str, seed = 0) {
         let text_color = luminance > 50 ? "#000000" : "#ffffff";
         console.log("text color:", text_color);
         if (luminance > 50) {
-        
+
           ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
-        
         }
         else {
-        
           ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
-        
         }
 
         ship_element.appendChild(ship);
@@ -287,11 +282,9 @@ function check_island() {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 600 + "px";
         }
+
+        island[j][0].style.backgroundColor = 'transparent';
         
-        island[j][0].style.backgroundColor = '#6699FF';
-      /*
-        island[j][0].style.backgroundColor = '#33FF00';
-        */
         
         post_data('http://10.204.227.162:8000/services/',
           {
@@ -316,7 +309,7 @@ function check_island() {
         island[j][0].style.backgroundColor = '#CCCCCC';
         island[j][0].style.backgroundColor = '#6699FF';
         */
-        island[j][0].style.backgroundColor = '#CCCCCC';
+        island[j][0].style.backgroundColor = 'transparent';
         island[j][0].classList.remove("bind");
       }
       for (let i = 0; i < elements.length; i++) {

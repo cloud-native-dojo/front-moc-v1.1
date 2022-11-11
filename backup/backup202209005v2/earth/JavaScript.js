@@ -282,7 +282,7 @@ function check_island() {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 600 + "px";
         }
-        island[j][0].style.backgroundColor = '#33FF00';
+        island[j][0].style.backgroundColor = '#red';
 
         post_data('http://10.204.227.162:8000/services/',
           {

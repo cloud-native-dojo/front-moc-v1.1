@@ -217,7 +217,7 @@ const cyrb53 = function (str, seed = 0) {
 
 function check_island() {
   for (let j = 0; j < island_rect.length; j++) {
-    island[j][0].style.backgroundColor = '#CCCCCC';
+    island[j][0].style.backgroundColor = '#CCC';
     island[j][0].classList.remove("bind");
   }
 
