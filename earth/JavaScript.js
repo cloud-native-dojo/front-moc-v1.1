@@ -478,3 +478,12 @@ async function delete_data(url = '', data = {}) {
   })
   return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
 }
+
+document.querySelector(".confirm").addEventListener("click", function (e) {
+  for (let j = 0; j < island_rect.length; j++) {
+    if (island[j][0].style.backgroundColor == 'transparent') {
+      party.confetti(document.getElementsByClassName("island1")[0]);
+      console.log("party!")
+    }
+  }
+});
