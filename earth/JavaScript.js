@@ -75,10 +75,13 @@ const cyrb53 = function (str, seed = 0) {
         console.log("text color:", text_color);
         if (luminance > 50) {
 
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+
         }
         else {
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+
         }
 
         ship_element.appendChild(ship);
@@ -113,7 +116,7 @@ const cyrb53 = function (str, seed = 0) {
     }
     for (let i = 0; i < elements.length; i++) {
       try {
-	const element_id = elements[i].id;
+        const element_id = elements[i].id;
         console.log("ship top position:", save_data.ship[element_id].split(" ")[0]);
         elements[i].style.top = save_data.ship[element_id].split(" ")[0];
         elements[i].style.left = save_data.ship[element_id].split(" ")[1];
@@ -219,32 +222,32 @@ const cyrb53 = function (str, seed = 0) {
 })()
 
 async function check_status() {
-    console.log("called: check_status()");
+  console.log("called: check_status()");
 
-    let result = await fetch("http://10.204.227.162:8000/pods/status/");
-    if (result.ok) {
-      let status_data = (await result.json()).data;
-      for (let i = 0; i < status_data.length; i++) {
-	const ship_id = elements[i].id;
-	const ship_status = status_data[i];
-	try {
-          console.log("ship status:", ship_id, ship_status);
-        } catch (e) {
-          continue;
-	}
-
-        const target = document.getElementById("loading_" + ship_id)
-        if (ship_status == false) {
-          target.style.visibility = "visible";
-        } else {
-          target.style.visibility = "hidden";
-          console.log("ship ready:", ship_id);
-        }
+  let result = await fetch("http://10.204.227.162:8000/pods/status/");
+  if (result.ok) {
+    let status_data = (await result.json()).data;
+    for (let i = 0; i < status_data.length; i++) {
+      const ship_id = elements[i].id;
+      const ship_status = status_data[i];
+      try {
+        console.log("ship status:", ship_id, ship_status);
+      } catch (e) {
+        continue;
       }
-    } else {
-      alert("HTTP-Error: " + response.status);
+
+      const target = document.getElementById("loading_" + ship_id)
+      if (ship_status == false) {
+        target.style.visibility = "visible";
+      } else {
+        target.style.visibility = "hidden";
+        console.log("ship ready:", ship_id);
+      }
     }
+  } else {
+    alert("HTTP-Error: " + response.status);
   }
+}
 
 
 function check_island() {
@@ -255,7 +258,7 @@ function check_island() {
   for (let j = 0; j < island_rect.length; j++) {
     for (let i = 0; i < elements.length; i++) {
       var delete_box = document.getElementsByClassName("delete_ship")[0].getBoundingClientRect();
-      console.log("delete_box top:",delete_box.top, "left:", delete_box.left, "bottom:", delete_box.bottom, "right:",delete_box.right);
+      console.log("delete_box top:", delete_box.top, "left:", delete_box.left, "bottom:", delete_box.bottom, "right:", delete_box.right);
       console.log("ship top:", ship_rect[i].top, "left:", ship_rect[i].left, "bottom:", ship_rect[i].bottom, "right:", ship_rect[i].right);
       if (detectCollision(delete_box, ship_rect[i])) {
         console.log(elements[i].id);
@@ -284,8 +287,8 @@ function check_island() {
         }
 
         island[j][0].style.backgroundColor = 'transparent';
-        
-        
+
+
         post_data('http://10.204.227.162:8000/services/',
           {
             // "port": all_ports[j].innerText,
@@ -314,7 +317,7 @@ function check_island() {
       }
       for (let i = 0; i < elements.length; i++) {
         if (elements[i].classList.contains("bind") == false) {
-          console.log("send:"+ elements[i].id)
+          console.log("send:" + elements[i].id)
           post_data('http://10.204.227.162:8000/services/',
             {
               // "port": all_ports[j].innerText,
@@ -322,9 +325,9 @@ function check_island() {
               "name": elements[i].id
             }
           )
-          .then(data => {
-            console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
-          });
+            .then(data => {
+              console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
+            });
         }
       }
       if (ship_rect[i].top > document.documentElement.clientHeight) {
