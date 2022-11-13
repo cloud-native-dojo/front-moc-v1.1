@@ -75,12 +75,18 @@ const cyrb53 = function (str, seed = 0) {
         console.log("text color:", text_color);
         if (luminance > 50) {
 
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><svg id=\"ship_1\" width=\"250\" height=\"280\" viewBox=\"0, 0, 250, 280\" xmlns=\"http://www.w3.org/2000/svg\"> \
+          <path stroke=\"brack\" stroke-width=\"2\" fill= \"white\"  d=\"M 400 100 L  400 120 430 120 C 430 120 410 140 430 160 L 270 160 C 270 160 250 140 270 120 L 300 120 M 300 160 L 300 170 \"/> \
+          <path stroke=\"brack\" stroke-width=\"2\" fill= \"Brown\"  d=\"M 260 170  L 340 170 C 350 170 303 250 260 170\"/>\
+          <path stroke=\"#4169E1\" stroke-width=\"7\" fill= \"none\"  d=\"M 260 205 C 260 205 267 210 270 205 C 270 205 275 198 280 205 C 280 205 285 212 290 205 C 290 205 295 198 200 205\"/>\
+          <path stroke=\"#4169E1\" stroke-width=\"7\" fill= \"none\"  d=\"M 300 205 C 300 205 307 210 310 205 C 310 205 315 198 320 205 C 320 205 325 212 330 205 C 330 205 335 198 340 205\"/>\</svg>";
 
         }
         else {
 
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><svg id=\"ship_1\" width=\"900\" height=\"960\" viewBox=\"0, 0, 900, 960\" xmlns=\"http://www.w3.org/2000/svg\"> \
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"white\" d=\"M 60 0 L  60 20 90 20 C 90 20 70 40 90 60 L 30 60 C 30 60 10 40 30 20 L 60 20 M 60 60 L 60 70 \"/>\
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"Brown\" d=\"M 20 70  L 100 70 C 110 70 63 130 20 70\"/>\</svg> ";
 
         }
 
