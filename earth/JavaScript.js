@@ -19,6 +19,8 @@ var ship_box = document.getElementById("ship_box").getBoundingClientRect();
 
 var ship_rect = [];
 
+
+
 for (var i = 0; i < island.length; i++) {
   island[i][0].style.visibility = "hidden";
   all_ports[i].style.visibility = "hidden";
@@ -268,30 +270,44 @@ function check_island() {
         console.log(elements[i].id);
         deleteShip(elements[i].id);
         elements[i].remove();
+
+        const music = new Audio('sound/delete_ship.mp3');
+        music.currentTime = 0;
+        music.play();
       }
       if (detectCollision(ship_box, ship_rect[i]) == false
         && detectCollision(island_rect[j], ship_rect[i])
         && island[j][0].classList.contains("bind") == false
         && window.getComputedStyle(island[j][0]).visibility == "visible") {
+        //繋がった時に流す音声ファイルの追加
+        const music = new Audio('sound/connect.mp3');
         if (j == 0) {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 270 + "px";
           party.confetti(document.getElementsByClassName("island1")[0])
+          music.currentTime = 0;
+          music.play();
         }
         if (j == 1) {
           elements[i].style.top = 610 + "px";
           elements[i].style.left = 550 + "px";
           party.confetti(document.getElementsByClassName("island2")[0])
+          music.currentTime = 0;
+          music.play();
         }
         if (j == 2) {
           elements[i].style.top = 610 + "px";
           elements[i].style.left = 300 + "px";
           party.confetti(document.getElementsByClassName("island3")[0])
+          music.currentTime = 0;
+          music.play();
         }
         if (j == 3) {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 600 + "px";
           party.confetti(document.getElementsByClassName("island4")[0])
+          music.currentTime = 0;
+          music.play();
         }
 
         island[j][0].style.backgroundColor = 'transparent';
