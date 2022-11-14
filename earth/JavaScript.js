@@ -75,12 +75,16 @@ const cyrb53 = function (str, seed = 0) {
         console.log("text color:", text_color);
         if (luminance > 50) {
 
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\"><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><svg id=\"ship_1\" width=\"900\" height=\"960\" viewBox=\"0, 0, 900, 960\" xmlns=\"http://www.w3.org/2000/svg\"> \
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"white\" d=\"M 60 0 L  60 20 90 20 C 90 20 70 40 90 60 L 30 60 C 30 60 10 40 30 20 L 60 20 M 60 60 L 60 70 \"/>\
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"Brown\" d=\"M 20 70  L 100 70 C 110 70 63 130 20 70\"/>\</svg> ";
 
         }
         else {
 
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><img src=\"https://cdn-icons-png.flaticon.com/512/870/870056.png\" width=\"100\" height=\"100\" style='filter: invert(100%);'><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;'>" + pods[i] + "</p><p style='color:" + text_color + ";font-weight: bold;margin-top: -25px;animation: blinkEffect 1s ease infinite; visibility: hidden;' id='loading_" + pods[i] + "'>loading</p><div>";
+          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><svg id=\"ship_1\" width=\"900\" height=\"960\" viewBox=\"0, 0, 900, 960\" xmlns=\"http://www.w3.org/2000/svg\"> \
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"white\" d=\"M 60 0 L  60 20 90 20 C 90 20 70 40 90 60 L 30 60 C 30 60 10 40 30 20 L 60 20 M 60 60 L 60 70 \"/>\
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"Brown\" d=\"M 20 70  L 100 70 C 110 70 63 130 20 70\"/>\</svg> ";
 
         }
 
