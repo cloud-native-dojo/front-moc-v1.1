@@ -84,9 +84,9 @@ const cyrb53 = function (str, seed = 0) {
         }
         else {
 
-          ship.innerHTML = "<div style='background:" + bgcode + ";width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"30\" height=\"30\"><svg id=\"ship_1\" width=\"107\" height=\"110\" viewBox=\"0, 0, 107, 110\" xmlns=\"http://www.w3.org/2000/svg\"> \
+          ship.innerHTML = "<div style=width:120px;height:140px;'><img src=\"./img/browser.svg\" width=\"130\" height=\"30\"><svg id=\"ship_1\" width=\"107\" height=\"110\" viewBox=\"0, 0, 107, 110\" xmlns=\"http://www.w3.org/2000/svg\"> \
           <path stroke=\"black\" stroke-width=\"2\" fill=\"white\" d=\"M 60 0 L  60 20 90 20 C 90 20 70 40 90 60 L 30 60 C 30 60 10 40 30 20 L 60 20 M 60 60 L 60 70 \"/>\
-          <path stroke=\"black\" stroke-width=\"2\" fill=\"Brown\" d=\"M 20 70  L 100 70 C 110 70 63 130 20 70\"/>\
+          <path stroke=\"black\" stroke-width=\"2\" fill=\"" + bgcode + "\" d=\"M 20 70  L 100 70 C 110 70 63 130 20 70\"/>\
           <path stroke=\"#4169E1\" stroke-width=\"7\" fill=\"#4169E1\" d=\"M 19 97 C 19 97 26 102 29 97 C 29 97 34 90 39 97 C 39 97 44 104 49 97 C 50 97 55 90  61 97 \"/>\
           <path stroke=\"#4169E1\" stroke-width=\"7\" fill=\"#4169E1\" d=\"M 60 96 C 60 96 67 101 70 96 C 70 96 75 89 80 96 C 80 96 85 103 90 96 C 90 96 95 89 100 96 \"/>\</svg> ";
 
@@ -278,23 +278,23 @@ function check_island() {
         && island[j][0].classList.contains("bind") == false
         && window.getComputedStyle(island[j][0]).visibility == "visible") {
         if (j == 0) {
-          elements[i].style.top = 160 + "px";
-          elements[i].style.left = 270 + "px";
+          elements[i].style.top = 129 + "px";
+          elements[i].style.left = 210 + "px";
           party.confetti(document.getElementsByClassName("island1")[0])
         }
         if (j == 1) {
-          elements[i].style.top = 610 + "px";
-          elements[i].style.left = 550 + "px";
+          elements[i].style.top = 582 + "px";
+          elements[i].style.left = 697 + "px";
           party.confetti(document.getElementsByClassName("island2")[0])
         }
         if (j == 2) {
-          elements[i].style.top = 610 + "px";
-          elements[i].style.left = 300 + "px";
+          elements[i].style.top = 581 + "px";
+          elements[i].style.left = 212 + "px";
           party.confetti(document.getElementsByClassName("island3")[0])
         }
         if (j == 3) {
-          elements[i].style.top = 160 + "px";
-          elements[i].style.left = 600 + "px";
+          elements[i].style.top = 131 + "px";
+          elements[i].style.left = 697 + "px";
           party.confetti(document.getElementsByClassName("island4")[0])
         }
 
