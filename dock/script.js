@@ -26,9 +26,9 @@ function onDrop(event) {
   event.preventDefault();
 
   if (event.target.className === "dropzone") {
-    console.log("1");
     const clone = dragged.cloneNode(true);
     event.target.appendChild(clone);
+    console.log(document.getElementsByClassName("dropzone")[0].children);
     deleteKaraBox();
   }
   else if (event.target.className === "example-origin") {
@@ -74,17 +74,20 @@ async function moveNewPage() {
     Shipname = shipname.value;
   }
   var url = "http://10.204.227.162/earth/earth.html"
+  var items = document.getElementsByClassName("dropzone")[0].children;
+  var last_item = items.item(items.length-1).id;
   makepod('http://10.204.227.162:8000/pods/',
     {
       "containers": {
-        "wordpress": 1
+        [last_item]: 1
       },
       "name": Shipname
     })
     .then(data => {
       console.log(data); // `data.json()` の呼び出しで解釈された JSON データ
       window.location.href = url;
-    });
+      
+  });
 }
 
 
