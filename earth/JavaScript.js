@@ -272,18 +272,22 @@ function check_island() {
         if (j == 0) {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 270 + "px";
+          party.confetti(document.getElementsByClassName("island1")[0])
         }
         if (j == 1) {
           elements[i].style.top = 610 + "px";
           elements[i].style.left = 550 + "px";
+          party.confetti(document.getElementsByClassName("island2")[0])
         }
         if (j == 2) {
           elements[i].style.top = 610 + "px";
           elements[i].style.left = 300 + "px";
+          party.confetti(document.getElementsByClassName("island3")[0])
         }
         if (j == 3) {
           elements[i].style.top = 160 + "px";
           elements[i].style.left = 600 + "px";
+          party.confetti(document.getElementsByClassName("island4")[0])
         }
 
         island[j][0].style.backgroundColor = 'transparent';
@@ -478,12 +482,3 @@ async function delete_data(url = '', data = {}) {
   })
   return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
 }
-
-document.querySelector(".confirm").addEventListener("click", function (e) {
-  for (let j = 0; j < island_rect.length; j++) {
-    if (island[j][0].style.backgroundColor == 'transparent') {
-      party.confetti(document.getElementsByClassName("island1")[0]);
-      console.log("party!")
-    }
-  }
-});
