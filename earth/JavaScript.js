@@ -284,7 +284,7 @@ function check_island() {
         && island[j][0].classList.contains("bind") == false
         && window.getComputedStyle(island[j][0]).visibility == "visible") {
         //繋がった時に流す音声ファイルの追加
-        const music = new Audio('sound/connect.mp3');
+        const music = new Audio('sound/cracker.mp3');
         if (j == 0) {
           elements[i].style.top = 129 + "px";
           elements[i].style.left = 210 + "px";
