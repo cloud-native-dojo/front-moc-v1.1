@@ -45,7 +45,7 @@
   padding-top: 40%;
 
   border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
-  background-color: #CCCCCC;
+  background-color: transparent;
   /*
   transform: skewX(-20deg);
   */
@@ -63,7 +63,7 @@
   padding-top: 40%;
   
   border-radius: 70% 30% 70% 30% / 70% 30% 70% 30%;
-  background-color: #CCCCCC;
+  background-color: transparent;
   /*
   transform: skewX(-20deg);
   */
@@ -79,7 +79,7 @@
   padding-top: 40%;
   
   border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
-  background-color: #CCCCCC;
+  background-color: transparent;
     /*
   transform: skewX(-20deg);
   */
@@ -95,7 +95,7 @@
   padding-top: 40%;
   
   border-radius: 30% 70% 30% 70% / 30% 70% 30% 70%;
-  background-color: #CCCCCC;
+  background-color: transparent;
     /*
   transform: skewX(-20deg);
   */
