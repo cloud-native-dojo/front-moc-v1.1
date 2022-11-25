@@ -255,7 +255,7 @@ async function check_status() {
         console.log("ship ready:", ship_id);
         await fetch("http://10.204.227.162:8000/" + ship_id + "/pass")
           .then((response) => response.json())
-          .then((data) => target.innerHTML = "pass:" + data.pass);
+          .then((data) => target.innerHTML = "pass: " + data.pass);
       }
     }
   } else {
